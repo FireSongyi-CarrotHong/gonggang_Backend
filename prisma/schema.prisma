@@ -9,3 +9,49 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id              Int        @id @default(autoincrement())
+  username        String     @db.VarChar(100)
+  profile_img_url String     @db.VarChar(255)
+  theme_color     String     @db.VarChar(100)
+  created_at      DateTime?  @default(now())
+  updated_at      DateTime?  @default(now())
+  UserRoom        UserRoom[]
+  Schedule        Schedule[]
+
+  @@map("users")
+}
+
+model UserRoom {
+  id         Int       @id @default(autoincrement())
+  user_id    Int
+  room_id    Int
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+  user       User      @relation(fields: [user_id], references: [id])
+  room       Room      @relation(fields: [room_id], references: [id])
+
+  @@map("user_rooms")
+}
+
+model Room {
+  id         Int        @id @default(autoincrement())
+  room_name  String     @db.VarChar(100)
+  created_at DateTime?  @default(now())
+  updated_at DateTime?  @default(now())
+  UserRoom   UserRoom[]
+
+  @@map("rooms")
+}
+
+model Schedule {
+  id          Int       @id @default(autoincrement())
+  user_id     Int
+  time_number Int       @db.TinyInt
+  created_at  DateTime? @default(now())
+  updated_at  DateTime? @default(now())
+  user        User      @relation(fields: [user_id], references: [id])
+
+  @@map("schedules")
+}
