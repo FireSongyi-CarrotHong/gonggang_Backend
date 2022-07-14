@@ -13,7 +13,7 @@ datasource db {
 model User {
   id              Int        @id @default(autoincrement())
   username        String     @db.VarChar(100)
-  profile_img_url String     @db.VarChar(255)
+  profile_img_url String?    @db.VarChar(255)
   theme_color     String     @db.VarChar(100)
   created_at      DateTime?  @default(now())
   updated_at      DateTime?  @default(now())
@@ -37,7 +37,7 @@ model UserRoom {
 
 model Room {
   id         Int        @id @default(autoincrement())
-  room_name  String     @db.VarChar(100)
+  roomname   String     @unique @db.VarChar(100)
   created_at DateTime?  @default(now())
   updated_at DateTime?  @default(now())
   UserRoom   UserRoom[]
