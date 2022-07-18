@@ -12,6 +12,7 @@ datasource db {
 
 model User {
   id              Int        @id @default(autoincrement())
+  kakao_id        Int        @unique
   username        String     @db.VarChar(100)
   profile_img_url String?    @db.VarChar(255)
   theme_color     String     @db.VarChar(100)
