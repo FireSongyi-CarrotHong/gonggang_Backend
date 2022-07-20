@@ -47,12 +47,12 @@ model Room {
 }
 
 model Schedule {
-  id          Int       @id @default(autoincrement())
-  user_id     Int
-  time_number Int       @db.TinyInt
-  created_at  DateTime? @default(now())
-  updated_at  DateTime? @default(now())
-  user        User      @relation(fields: [user_id], references: [id])
+  id              Int       @id @default(autoincrement())
+  user_id         Int
+  schedule_number Int       @db.TinyInt
+  created_at      DateTime? @default(now())
+  updated_at      DateTime? @default(now())
+  user            User      @relation(fields: [user_id], references: [id])
 
   @@map("schedules")
 }
