@@ -15,7 +15,7 @@ const userCheck = async (data) => {
     );
   }
 
-  const token = jwt.sign({ id: user[0].id }, GG_SECRET_KEY);
+  const token = jwt.sign({ id: user.id }, GG_SECRET_KEY);
 
   return token;
 };
@@ -60,6 +60,17 @@ const signupWithLogin = async (code) => {
   }
 };
 
+const getUserInfo = async (id) => {
+  try {
+    const userInfo = await userDao.getUserInfo(id);
+
+    return userInfo;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   signupWithLogin,
+  getUserInfo,
 };

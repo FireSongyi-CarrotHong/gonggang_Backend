@@ -11,4 +11,15 @@ const signupWithLogin = async (req, res) => {
   }
 };
 
-module.exports = { signupWithLogin };
+const getUserInfo = async (req, res) => {
+  try {
+    const id = req.userId;
+    const userInfo = await userService.getUserInfo(id);
+
+    return res.status(200).json({ userInfo }.userInfo);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+module.exports = { signupWithLogin, getUserInfo };
