@@ -29,7 +29,7 @@ const createRoomName = async (req, res, next) => {
     const roomName = req.room_name;
 
     if (!roomName.length) {
-      errorGenerator({
+      throw await errorGenerator({
         statusCode: 400,
         message: "방 이름 길이는 0자 이상이어야 합니다.",
       });
@@ -50,7 +50,7 @@ const patchRoomName = async (req, res, next) => {
     const roomName = req.room_name;
 
     if (!roomName.length) {
-      errorGenerator({
+      throw await errorGenerator({
         statusCode: 400,
         message: "방 이름 길이는 0자 이상이어야 합니다.",
       });
