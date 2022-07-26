@@ -2,57 +2,57 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+    provider = "mysql"
+    url      = env("DATABASE_URL")
 }
 
 model User {
-  id              Int        @id @default(autoincrement())
-  kakao_id        Int        @unique
-  username        String     @db.VarChar(100)
-  profile_img_url String?    @db.VarChar(255)
-  theme_color     String     @db.VarChar(100)
-  created_at      DateTime?  @default(now())
-  updated_at      DateTime?  @default(now())
-  UserRoom        UserRoom[]
-  Schedule        Schedule[]
+    id              Int        @id @default(autoincrement())
+    kakao_id        BigInt     @unique
+    username        String     @db.VarChar(100)
+    profile_img_url String?    @db.VarChar(255)
+    theme_color     String?    @db.VarChar(100)
+    created_at      DateTime?  @default(now())
+    updated_at      DateTime?  @default(now())
+    UserRoom        UserRoom[]
+    Schedule        Schedule[]
 
-  @@map("users")
+    @@map("users")
 }
 
 model UserRoom {
-  id         Int       @id @default(autoincrement())
-  user_id    Int
-  room_id    Int
-  created_at DateTime? @default(now())
-  updated_at DateTime? @default(now())
-  user       User      @relation(fields: [user_id], references: [id])
-  room       Room      @relation(fields: [room_id], references: [id])
+    id         Int       @id @default(autoincrement())
+    user_id    Int
+    room_id    Int
+    created_at DateTime? @default(now())
+    updated_at DateTime? @default(now())
+    user       User      @relation(fields: [user_id], references: [id])
+    room       Room      @relation(fields: [room_id], references: [id])
 
-  @@map("user_rooms")
+    @@map("user_rooms")
 }
 
 model Room {
-  id         Int        @id @default(autoincrement())
-  roomname   String     @unique @db.VarChar(100)
-  created_at DateTime?  @default(now())
-  updated_at DateTime?  @default(now())
-  UserRoom   UserRoom[]
+    id         Int        @id @default(autoincrement())
+    roomname   String     @unique @db.VarChar(100)
+    created_at DateTime?  @default(now())
+    updated_at DateTime?  @default(now())
+    UserRoom   UserRoom[]
 
-  @@map("rooms")
+    @@map("rooms")
 }
 
 model Schedule {
-  id              Int       @id @default(autoincrement())
-  user_id         Int
-  schedule_number Int       @db.TinyInt
-  created_at      DateTime? @default(now())
-  updated_at      DateTime? @default(now())
-  user            User      @relation(fields: [user_id], references: [id])
+    id              Int       @id @default(autoincrement())
+    user_id         Int
+    schedule_number Int       @db.TinyInt
+    created_at      DateTime? @default(now())
+    updated_at      DateTime? @default(now())
+    user            User      @relation(fields: [user_id], references: [id])
 
-  @@map("schedules")
+    @@map("schedules")
 }

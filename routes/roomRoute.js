@@ -36,3 +36,5 @@ router.patch(
   typeError.roomName,
   roomController.patchRoomName
 );
+
+module.exports = router;
