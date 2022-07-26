@@ -9,5 +9,10 @@ router.get(
   authorizedUser.getUserIdByVerifyToken,
   userController.getUserInfo
 );
+router.post(
+  "/color",
+  authorizedUser.getUserIdByVerifyToken,
+  userController.createThemeColor
+);
 
 module.exports = router;

@@ -70,7 +70,18 @@ const getUserInfo = async (id) => {
   }
 };
 
+const createThemeColor = async (id, color) => {
+  try {
+    const userColor = await userDao.createThemeColor(id, color);
+
+    return userColor;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 module.exports = {
   signupWithLogin,
   getUserInfo,
+  createThemeColor,
 };

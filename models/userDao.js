@@ -34,4 +34,8 @@ const getUserInfo = async (id) => {
   });
 };
 
-module.exports = { getUserId, createUser, getUserInfo };
+const createThemeColor = async (id, theme_color) => {
+  return await prisma.user.update({ where: { id }, data: { theme_color } });
+};
+
+module.exports = { getUserId, createUser, getUserInfo, createThemeColor };
