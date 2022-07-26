@@ -1,3 +1,14 @@
+const userColor = async (req, res, next) => {
+  const color = req.body.color;
+
+  if (!(typeof color === String))
+    return res
+      .status(400)
+      .json({ message: "TYPE_ERROR: theme_color's type should be string" });
+
+  next();
+};
+
 const roomId = async (req, res, next) => {
   const { room_id } = req.params;
 
@@ -21,6 +32,7 @@ const roomName = async (req, res, next) => {
 };
 
 module.exports = {
+  userColor,
   roomId,
   roomName,
 };
