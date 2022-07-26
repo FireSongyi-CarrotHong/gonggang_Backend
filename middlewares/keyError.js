@@ -16,7 +16,7 @@ const roomId = async (req, res, next) => {
 };
 
 const roomName = async (req, res, next) => {
-  const roomName = req.room_name;
+  const roomName = req.body.room_name;
 
   if (!roomName)
     return res.status(400).json({ message: "KEY_ERROR: no room_name" });
