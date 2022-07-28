@@ -26,6 +26,12 @@ router.post(
   typeError.roomName,
   roomController.createRoomName
 );
+router.post(
+  "/validate",
+  keyError.roomName,
+  typeError.roomName,
+  roomController.vaildate
+);
 
 // PATCH
 router.patch(

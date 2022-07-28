@@ -7,7 +7,7 @@ const GG_SECRET_KEY = process.env.SECRET_KEY;
 const userCheck = async (data) => {
   const user = await userDao.getUserId(data.id);
 
-  if (user.length === 0) {
+  if (user.id.length === 0) {
     const userInfo = await userDao.createUser(
       data.id,
       data.properties.nickname,
