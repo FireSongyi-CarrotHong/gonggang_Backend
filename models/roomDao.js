@@ -3,9 +3,12 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 const getRoomName = async (roomId) => {
-  return await prisma.rooms.findUnique({
+  return await prisma.room.findUnique({
     where: {
-      roomId,
+      id: roomId,
+    },
+    select: {
+      roomname: true,
     },
   });
 };
@@ -20,6 +23,7 @@ const getRoomUsers = async (roomId) => {
       user: {
         select: {
           username: true,
+          theme_color: true,
         },
       },
     },
