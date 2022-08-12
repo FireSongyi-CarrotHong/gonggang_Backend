@@ -24,4 +24,27 @@ const roomName = async (req, res, next) => {
   next();
 };
 
-module.exports = { userColor, roomId, roomName };
+const userId = async (req, res, next) => {
+  const { user_id } = req.params;
+
+  if (!user_id) {
+    return res.status(400).json({ message: "KEY_ERROR: no userId" });
+  }
+
+  next();
+};
+
+const schedules = async (req, res, next) => {
+  const schedule_number = req.body.schedule_number;
+
+  if (schedule_number) {
+    if (!schedule_number.length)
+      return res.status(400).json({ message: "KEY_ERROR: schedules is empty" });
+  } else {
+    return res.status(400).json({ message: "KEY_ERROR: no schedules" });
+  }
+
+  next();
+};
+
+module.exports = { userColor, roomId, roomName, userId, schedules };
