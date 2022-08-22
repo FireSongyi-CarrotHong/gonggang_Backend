@@ -41,6 +41,7 @@ const vaildate = async (req, res, next) => {
 // ---------------- POST ---------------- //
 const createRoomName = async (req, res, next) => {
   try {
+    const id = req.userId;
     const roomName = req.body.room_name;
 
     if (!roomName.length) {
@@ -50,7 +51,7 @@ const createRoomName = async (req, res, next) => {
       });
     }
 
-    const room = await roomService.createRoomName(roomName);
+    const room = await roomService.createRoomName(id, roomName);
     return res
       .status(200)
       .json({ message: "ROOMNAME ADD SUCCESS", room_id: room.id });

@@ -46,6 +46,15 @@ const createRoomName = async (roomName) => {
   });
 };
 
+const createUserRoomId = async (userId, roomId) => {
+  return await prisma.userRoom.create({
+    data: {
+      user_id: userId,
+      room_id: roomId,
+    },
+  });
+};
+
 const patchRoomName = async (roomId, roomName) => {
   return await prisma.room.update({
     where: {
@@ -61,6 +70,7 @@ module.exports = {
   getRoomName,
   getRoomUsers,
   createRoomName,
+  createUserRoomId,
   vaildate,
   patchRoomName,
 };

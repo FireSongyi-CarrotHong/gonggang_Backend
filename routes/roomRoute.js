@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const roomController = require("../controllers/roomController");
+const authorizedUser = require("../middlewares/authorization");
 const keyError = require("../middlewares/keyError");
 const typeError = require("../middlewares/typeError");
 
@@ -24,6 +25,7 @@ router.post(
   "/",
   keyError.roomName,
   typeError.roomName,
+  authorizedUser.getUserIdByVerifyToken,
   roomController.createRoomName
 );
 router.post(

@@ -13,17 +13,18 @@ const vaildate = async (roomName) => {
   const validate = await roomDao.vaildate(roomName);
 
   if (!validate) {
-    return { message: "OK", room_name: roomName };
+    return { message: "OK" };
+  } else {
+    return { message: "DUPLICATE" };
   }
-
-  throw await errorGenerator({
-    statusCode: 400,
-    message: "이미 존재하는 제목입니다.",
-  });
 };
 
-const createRoomName = async (roomName) => {
-  return await roomDao.createRoomName(roomName);
+const createRoomName = async (userId, roomName) => {
+  const createRoom = await roomDao.createRoomName(roomName);
+  const roomId = createRoom.id;
+  const createUserRoom = await roomDao.createUserRoomId(userId, roomId);
+
+  return createRoom;
 };
 
 const patchRoomName = async (roomId, roomName) => {
