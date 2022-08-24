@@ -8,7 +8,7 @@ const getRoomName = async (req, res, next) => {
     const room_Id = Number(room_id);
 
     const roomName = await roomService.getRoomName(room_Id);
-    return res.status(200).json({ roomName });
+    return res.status(200).json(roomName);
   } catch (error) {
     res.status(error.statusCode || 500).json({ message: error.message });
   }
