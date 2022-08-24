@@ -8,7 +8,7 @@ const getRoomName = async (req, res, next) => {
     const room_Id = Number(room_id);
 
     const roomName = await roomService.getRoomName(room_Id);
-    return res.status(200).json({ roomName });
+    return res.status(200).json(roomName);
   } catch (error) {
     res.status(error.statusCode || 500).json({ message: error.message });
   }
@@ -41,6 +41,7 @@ const vaildate = async (req, res, next) => {
 // ---------------- POST ---------------- //
 const createRoomName = async (req, res, next) => {
   try {
+    const id = req.userId;
     const roomName = req.body.room_name;
 
     if (!roomName.length) {
@@ -50,7 +51,7 @@ const createRoomName = async (req, res, next) => {
       });
     }
 
-    const room = await roomService.createRoomName(roomName);
+    const room = await roomService.createRoomName(id, roomName);
     return res
       .status(200)
       .json({ message: "ROOMNAME ADD SUCCESS", room_id: room.id });

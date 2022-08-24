@@ -3,9 +3,12 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 const getRoomName = async (roomId) => {
-  return await prisma.rooms.findUnique({
+  return await prisma.room.findUnique({
     where: {
-      roomId,
+      id: roomId,
+    },
+    select: {
+      roomname: true,
     },
   });
 };
@@ -20,6 +23,7 @@ const getRoomUsers = async (roomId) => {
       user: {
         select: {
           username: true,
+          theme_color: true,
         },
       },
     },
@@ -42,6 +46,15 @@ const createRoomName = async (roomName) => {
   });
 };
 
+const createUserRoomId = async (userId, roomId) => {
+  return await prisma.userRoom.create({
+    data: {
+      user_id: userId,
+      room_id: roomId,
+    },
+  });
+};
+
 const patchRoomName = async (roomId, roomName) => {
   return await prisma.room.update({
     where: {
@@ -57,6 +70,7 @@ module.exports = {
   getRoomName,
   getRoomUsers,
   createRoomName,
+  createUserRoomId,
   vaildate,
   patchRoomName,
 };
